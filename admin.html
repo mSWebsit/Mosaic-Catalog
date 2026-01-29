@@ -2,82 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- CRITICAL FOR MOBILE -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Admin Panel | Mosaic Romance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Mosaic Event</title>
     <link rel="stylesheet" href="adminStyle.css">
 </head>
 <body>
 
-    <!-- LOGIN SECTION -->
     <div id="loginBox" class="admin-container">
         <a href="index.html" class="back-link">← Back to Website</a>
-        <h2>Admin Access</h2>
+        <h2>Admin Login</h2>
         <input type="email" id="email" placeholder="Email Address">
         <input type="password" id="pass" placeholder="Password">
         <button id="doLogin" class="primary-btn">Sign In</button>
     </div>
 
-    <!-- MAIN DASHBOARD -->
     <div id="adminPanel" class="admin-container hidden">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px;">
-        <a href="index.html" class="back-link">← Website</a>
-        <h2 style="margin-bottom: 0; border: none; padding: 0;">Dashboard</h2>
-        <div style="width: 60px;"></div> <!-- Spacer for centering -->
-    </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <a href="index.html" class="back-link">← Website</a>
+            <h2 style="margin:0; border:none;">Dashboard</h2>
+            <div style="width:60px;"></div>
+        </div>
         
-        <label style="font-size: 0.8rem; color: #64748b;">Product Name</label>
-        <input type="text" id="title" placeholder="e.g. Red Rose Box">
+        <label>Product Name</label>
+        <input type="text" id="title" placeholder="e.g. Elegant Wedding Arch">
         
-        <label style="font-size: 0.8rem; color: #64748b;">Category</label>
+        <label>Category</label>
         <select id="cat">
-            <option value="valentine">Valentine Collection</option>
-            <option value="wedding">Weddings</option>
-            <option value="engagement">Engagements</option>
-            <option value="birthday">Birthdays</option>
+            <option value="wedding">Wedding</option>
+            <option value="engagement">Engagement</option>
+            <option value="birthday">Birthday</option>
             <option value="graduation">Graduations</option>
             <option value="gender-reveal">Gender Reveal</option>
             <option value="fresh-bouquet">Fresh Flowers</option>
             <option value="silk-bouquet">Silk Flowers</option>
             <option value="natural-plant">Natural Plants</option>
-            <option value="rental">Rentals/Others</option>
+            <option value="rental">Rentals</option>
         </select>
 
         <div class="tag-container">
-            <p style="font-size:0.8rem; margin-bottom:10px; font-weight:bold;">Select Tags:</p>
-            <div class="tag-grid" id="tagPicker">
-                <div class="admin-tag-pill">Fresh</div>
-                <div class="admin-tag-pill">Silk</div>
-                <div class="admin-tag-pill">Natural</div>
-                <div class="admin-tag-pill">Luxury</div>
-                <div class="admin-tag-pill">Roses</div>
-                <div class="admin-tag-pill">Limited</div>
+            <p style="font-size:0.8rem; font-weight:bold; margin-bottom:10px;">Select Tags:</p>
+            <div class="tag-grid">
+                <div class="admin-tag-pill">Fresh</div><div class="admin-tag-pill">Silk</div>
+                <div class="admin-tag-pill">Natural</div><div class="admin-tag-pill">Luxury</div>
+                <div class="admin-tag-pill">Roses</div><div class="admin-tag-pill">Potted</div>
             </div>
         </div>
 
-        <label style="font-size: 0.8rem; color: #64748b;">Includes</label>
-        <textarea id="inc" placeholder="24 Roses, Velvet Box, Personalized Card..."></textarea>
+        <label>Includes (Separate items with commas)</label>
+        <textarea id="inc" placeholder="12 Roses, Velvet Box, Personalized Card..."></textarea>
         
-        <label style="font-size: 0.8rem; color: #64748b;">Product Photo</label>
-        <input type="file" id="file" accept="image/*">
+        <label>Direct Image Link (from PostImages.org)</label>
+        <input type="text" id="imgUrl" placeholder="https://i.postimg.cc/xxxx/image.jpg">
         
-        <button id="upBtn" class="primary-btn">Publish Product</button>
+        <button id="upBtn" class="primary-btn">Publish to Catalog</button>
 
-        <h3 style="border-top: 1px solid #eee; padding-top: 20px;">Live Items</h3>
+        <h3 style="border-top:1px solid #eee; padding-top:20px;">Live Catalog Items</h3>
         <div id="itemList"></div>
-        
-        <button id="doLogout" style="margin-top:40px; background:none; border:none; color:#94a3b8; cursor:pointer; width:100%; text-align:center; font-size: 0.9rem;">Logout from Admin</button>
+        <button id="doLogout" style="width:100%; background:none; border:none; color:#999; margin-top:20px; cursor:pointer;">Sign Out</button>
     </div>
 
-    <!-- FIREBASE LOGIC -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-        // CONFIG (Using your provided credentials)
-        const firebaseConfig = { 
+        const cfg = { 
             apiKey: "AIzaSyDuNCOMv1g7j0EXTT_dDRlwYWganwSh3Fs", 
             authDomain: "mosaic-6a2fc.firebaseapp.com", 
             projectId: "mosaic-6a2fc", 
@@ -86,88 +75,54 @@
             appId: "1:873883257365:web:7b20b9bbb1c9aac08adc1c" 
         };
 
-        const app = initializeApp(firebaseConfig); 
-        const auth = getAuth(app); 
-        const db = getFirestore(app); 
-        const storage = getStorage(app);
+        const app = initializeApp(cfg); const auth = getAuth(app); const db = getFirestore(app);
 
-        // UI Tag Toggle
+        // Fixed Tag Selection Logic
         document.querySelectorAll('.admin-tag-pill').forEach(p => {
             p.onclick = () => p.classList.toggle('active');
         });
 
-        // Auth Logic
         document.getElementById('doLogin').onclick = () => {
-            const email = document.getElementById('email').value;
-            const pass = document.getElementById('pass').value;
-            signInWithEmailAndPassword(auth, email, pass).catch(e => alert("Invalid Admin Credentials"));
+            signInWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('pass').value).catch(() => alert("Access Denied"));
         };
-        
         document.getElementById('doLogout').onclick = () => signOut(auth);
 
         onAuthStateChanged(auth, u => {
             document.getElementById('loginBox').classList.toggle('hidden', !!u);
             document.getElementById('adminPanel').classList.toggle('hidden', !u);
-            if(u) loadItems();
+            if(u) {
+                onSnapshot(query(collection(db, "products"), orderBy("createdAt", "desc")), s => {
+                    const l = document.getElementById('itemList'); l.innerHTML = "";
+                    s.forEach(d => {
+                        const i = d.data();
+                        l.innerHTML += `<div class="item-row"><img src="${i.image}"><div class="item-info"><span>${i.title}</span></div><div class="delete-link" onclick="window.del('${d.id}')">Delete</div></div>`;
+                    });
+                });
+            }
         });
 
-        // Upload Logic
         document.getElementById('upBtn').onclick = async () => {
-            const f = document.getElementById('file').files[0];
+            const imgUrl = document.getElementById('imgUrl').value;
             const title = document.getElementById('title').value;
-            if(!f || !title) return alert("Please provide at least a name and a photo.");
-            
-            const tags = Array.from(document.querySelectorAll('.admin-tag-pill.active')).map(p => p.innerText);
-            document.getElementById('upBtn').innerText = "Uploading... Please Wait";
-            document.getElementById('upBtn').disabled = true;
-            
-            try {
-                const sRef = ref(storage, `catalog/${Date.now()}_${f.name}`);
-                await uploadBytes(sRef, f);
-                const url = await getDownloadURL(sRef);
+            if(!imgUrl || !title) return alert("Title and Direct Image Link are required");
 
-                await addDoc(collection(db, "products"), {
-                    title: title,
-                    category: document.getElementById('cat').value,
-                    tags: tags,
-                    includes: document.getElementById('inc').value,
-                    image: url,
-                    createdAt: Date.now()
+            const tags = Array.from(document.querySelectorAll('.admin-tag-pill.active')).map(p => p.innerText);
+            document.getElementById('upBtn').innerText = "Publishing...";
+
+            try {
+                await addDoc(collection(db, "products"), { 
+                    title: title, 
+                    category: document.getElementById('cat').value, 
+                    tags: tags, 
+                    includes: document.getElementById('inc').value, 
+                    image: imgUrl, 
+                    createdAt: Date.now() 
                 });
                 location.reload();
-            } catch (err) {
-                alert("Upload failed. Check your internet.");
-                document.getElementById('upBtn').innerText = "Publish Product";
-                document.getElementById('upBtn').disabled = false;
-            }
+            } catch (e) { alert("Error saving product."); document.getElementById('upBtn').innerText = "Publish to Catalog"; }
         };
 
-        // Load List Logic
-        function loadItems() {
-            onSnapshot(query(collection(db, "products"), orderBy("createdAt", "desc")), s => {
-                const l = document.getElementById('itemList'); 
-                l.innerHTML = "";
-                s.forEach(d => {
-                    const i = d.data();
-                    const row = document.createElement('div');
-                    row.className = 'item-row';
-                    row.innerHTML = `
-                        <img src="${i.image}">
-                        <div class="item-info">
-                            <span>${i.title}</span>
-                        </div>
-                        <div class="delete-link" onclick="window.del('${d.id}')">Delete</div>
-                    `;
-                    l.appendChild(row);
-                });
-            });
-        }
-        
-        window.del = (id) => { 
-            if(confirm("Permanently delete this item from the catalog?")) {
-                deleteDoc(doc(db, "products", id)); 
-            }
-        };
+        window.del = (id) => { if(confirm("Permanently delete this item?")) deleteDoc(doc(db, "products", id)); };
     </script>
 </body>
 </html>
