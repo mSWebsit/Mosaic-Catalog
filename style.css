@@ -40,7 +40,7 @@ body {
     color: var(--dark);
 }
 
-/* NAVIGATION */
+/* NAV */
 .nav-desktop {
     display: flex;
     gap: 10px;
@@ -92,7 +92,7 @@ body {
     font-size: 0.65rem;
 }
 
-/* MOBILE NAVIGATION */
+/* MOBILE */
 .burger-menu {
     display: none;
     flex-direction: column;
@@ -117,19 +117,10 @@ body {
     transition: 0.4s;
     padding: 30px;
     overflow-y: auto;
-    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1);
 }
 
 .nav-drawer.open {
     left: 0;
-}
-
-.nav-label {
-    font-size: 0.65rem;
-    font-weight: 800;
-    color: var(--gold);
-    margin: 25px 0 10px;
-    text-transform: uppercase;
 }
 
 .menu-overlay {
@@ -144,7 +135,7 @@ body {
     display: block;
 }
 
-/* GRID & CARDS */
+/* GRID */
 .container {
     max-width: 1400px;
     margin: 40px auto;
@@ -163,9 +154,9 @@ body {
     border-radius: 4px;
     cursor: pointer;
     transition: 0.3s;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .card:hover {
@@ -173,12 +164,10 @@ body {
     border-color: var(--gold);
 }
 
-/* UNIFORM IMAGES */
 .img-box {
     width: 100%;
     aspect-ratio: 1/1;
     overflow: hidden;
-    background-color: #fafafa;
 }
 
 .img-box img {
@@ -196,7 +185,6 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: 0.95rem;
     margin-bottom: 8px;
-    color: var(--dark);
 }
 
 /* TAGS */
@@ -217,7 +205,7 @@ body {
     font-weight: 700;
 }
 
-/* MODALS */
+/* MODALS & STYLED CLOSE BUTTON */
 .modal {
     display: none;
     position: fixed;
@@ -235,9 +223,51 @@ body {
     width: 100%;
     max-width: 800px;
     position: relative;
-    animation: modalFadeUp 0.4s ease-out;
     border-radius: 8px;
     overflow: hidden;
+    display: flex;
+    animation: modalFadeUp 0.4s ease-out;
+}
+
+@keyframes modalFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    background: var(--white);
+    border: 1px solid #eee;
+    border-radius: 50%;
+    display: flex;
+    /* For perfect 'X' centering */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    font-size: 22px;
+    color: var(--dark);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.close-modal:hover {
+    background: var(--gold);
+    color: var(--white);
+    border-color: var(--gold);
+    transform: rotate(90deg);
+    /* Luxury animation effect */
 }
 
 .modal-body {
@@ -277,24 +307,21 @@ body {
     text-decoration: none;
     display: block;
     text-align: center;
-    font-size: 0.8rem;
     border-radius: 4px;
 }
 
-/* SOCIAL BUTTONS */
+/* SOCIALS */
 .social-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    display: block;
     padding: 15px;
+    margin-bottom: 10px;
     border-radius: 8px;
-    text-decoration: none;
     color: white;
+    text-decoration: none;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 0.8rem;
-    margin-bottom: 10px;
+    text-align: center;
 }
 
 .social-btn.instagram {
@@ -305,7 +332,6 @@ body {
     background: #000;
 }
 
-/* RESPONSIVE */
 @media (max-width: 1024px) {
     .grid {
         grid-template-columns: repeat(3, 1fr);
@@ -331,6 +357,10 @@ body {
 
     .modal-img-container {
         height: 300px;
+    }
+
+    .modal-content {
+        max-width: 95%;
     }
 }
 
