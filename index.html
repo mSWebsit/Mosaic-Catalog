@@ -39,11 +39,12 @@
                 </div>
             </div>
             <button class="nav-btn" data-filter="rental">Rentals</button>
-            <button class="nav-btn" id="socialsBtn">Socials</button>
+            <button class="nav-btn" id="socialsBtn" style="border:1px solid var(--gold); border-radius:20px;">Socials</button>
         </nav>
     </header>
 
     <nav class="nav-drawer" id="navDrawer">
+        <div class="drawer-top"><button id="closeDrawer" style="background:none; border:none; font-size:1.5rem;">&larr;</button></div>
         <div class="nav-label">CATEGORIES</div>
         <button class="nav-btn active" data-filter="all">All Designs</button>
         <div class="nav-label">OCCASIONS</div>
@@ -62,11 +63,13 @@
     </nav>
     <div class="menu-overlay" id="menuOverlay"></div>
 
-    <main class="container"><div class="grid" id="designGrid"></div></main>
+    <main class="container">
+        <div class="grid" id="designGrid"></div>
+    </main>
 
     <div id="detailModal" class="modal">
         <div class="modal-content">
-            <button onclick="document.getElementById('detailModal').style.display='none'; document.body.style.overflow='auto';" style="position:absolute; right:15px; top:15px; z-index:10; background:#fff; border:1px solid #eee; border-radius:50%; width:35px; height:35px; cursor:pointer;">&times;</button>
+            <button class="close-modal" onclick="document.getElementById('detailModal').style.display='none'; document.body.style.overflow='auto';">&times;</button>
             <div class="modal-body">
                 <div class="modal-img-container"><img id="modalImg" src=""></div>
                 <div class="modal-text-container">
@@ -80,15 +83,14 @@
     </div>
 
     <div id="socialsModal" class="modal">
-        <div class="modal-content" style="max-width: 400px; padding: 40px; text-align: center;">
+        <div class="modal-content" style="max-width: 400px; padding: 40px; text-align: center; flex-direction: column;">
+            <button class="close-modal" onclick="document.getElementById('socialsModal').style.display='none'; document.body.style.overflow='auto';">&times;</button>
             <h2 style="font-family:'Playfair Display'; margin-bottom:20px;">Follow Us</h2>
             <a href="https://instagram.com" target="_blank" class="social-btn instagram">Instagram</a>
             <a href="https://tiktok.com" target="_blank" class="social-btn tiktok">TikTok</a>
-            <button onclick="document.getElementById('socialsModal').style.display='none'; document.body.style.overflow='auto';" style="margin-top:20px; background:none; border:none; cursor:pointer; color:#888;">Close</button>
         </div>
     </div>
 
     <script type="module" src="script.js"></script>
 </body>
 </html>
-
