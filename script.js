@@ -23,13 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleDrawer = (s) => { navDrawer.classList.toggle('open', s); overlay.classList.toggle('show', s); document.body.style.overflow = s ? 'hidden' : 'auto'; };
     if(burger) burger.onclick = () => toggleDrawer(true);
     if(overlay) overlay.onclick = () => { toggleDrawer(false); document.querySelectorAll('.modal').forEach(m => m.style.display='none'); document.body.style.overflow='auto'; };
+    if(document.getElementById('closeDrawer')) document.getElementById('closeDrawer').onclick = () => toggleDrawer(false);
 
     onSnapshot(query(collection(db, "products"), orderBy("createdAt", "desc")), (snap) => {
         grid.innerHTML = '';
         snap.forEach((doc) => {
             const i = doc.data();
-            const tags = Array.isArray(i.tags) ? i.tags : [i.tags];
-            const tagsHTML = tags.map(t => `<span class="tag">${t}</span>`).join('');
+            const tagArr = Array.isArray(i.tags) ? i.tags : [i.tags];
+            const tagsHTML = tagArr.map(t => `<span class="tag">${t}</span>`).join('');
 
             const card = document.createElement('div');
             card.className = `card ${i.category}`;
