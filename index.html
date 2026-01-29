@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mosaic Event LB | Official Catalog</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="burger-menu" id="burgerToggle"><span class="line"></span><span class="line"></span><span class="line"></span></div>
+        <div class="logo">MOSAIC EVENT</div>
+        <nav class="nav-desktop">
+            <button class="nav-btn active" data-filter="all">All Designs</button>
+            <div class="dropdown">
+                <button class="nav-btn">Occasions ▾</button>
+                <div class="dropdown-content">
+                    <button class="nav-btn sub" data-filter="wedding">Weddings</button>
+                    <button class="nav-btn sub" data-filter="engagement">Engagements</button>
+                    <button class="nav-btn sub" data-filter="birthday">Birthdays</button>
+                    <button class="nav-btn sub" data-filter="graduation">Graduations</button>
+                    <button class="nav-btn sub" data-filter="gender-reveal">Gender Reveal</button>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="nav-btn">Florals ▾</button>
+                <div class="dropdown-content">
+                    <button class="nav-btn sub" data-filter="fresh-bouquet">Fresh Flowers</button>
+                    <button class="nav-btn sub" data-filter="silk-bouquet">Silk Flowers</button>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="nav-btn">Plants ▾</button>
+                <div class="dropdown-content">
+                    <button class="nav-btn sub" data-filter="natural-plant">Natural Plants</button>
+                    <button class="nav-btn sub" data-filter="artificial-plant">Artificial Plants</button>
+                </div>
+            </div>
+            <button class="nav-btn" data-filter="rental">Rentals</button>
+            <button class="nav-btn" id="socialsBtn">Socials</button>
+        </nav>
+    </header>
+
+    <nav class="nav-drawer" id="navDrawer">
+        <div class="nav-label">CATEGORIES</div>
+        <button class="nav-btn active" data-filter="all">All Designs</button>
+        <div class="nav-label">OCCASIONS</div>
+        <button class="nav-btn sub" data-filter="wedding">Weddings</button>
+        <button class="nav-btn sub" data-filter="engagement">Engagements</button>
+        <button class="nav-btn sub" data-filter="birthday">Birthdays</button>
+        <button class="nav-btn sub" data-filter="graduation">Graduations</button>
+        <button class="nav-btn sub" data-filter="gender-reveal">Gender Reveal</button>
+        <div class="nav-label">FLORALS & PLANTS</div>
+        <button class="nav-btn sub" data-filter="fresh-bouquet">Fresh Flowers</button>
+        <button class="nav-btn sub" data-filter="silk-bouquet">Silk Flowers</button>
+        <button class="nav-btn sub" data-filter="natural-plant">Natural Plants</button>
+        <div class="nav-label">LINKS</div>
+        <button class="nav-btn" data-filter="rental">Rentals</button>
+        <button class="nav-btn" id="socialsBtnMobile">Socials</button>
+    </nav>
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <main class="container"><div class="grid" id="designGrid"></div></main>
+
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <button onclick="document.getElementById('detailModal').style.display='none'; document.body.style.overflow='auto';" style="position:absolute; right:15px; top:15px; z-index:10; background:#fff; border:1px solid #eee; border-radius:50%; width:35px; height:35px; cursor:pointer;">&times;</button>
+            <div class="modal-body">
+                <div class="modal-img-container"><img id="modalImg" src=""></div>
+                <div class="modal-text-container">
+                    <h2 id="modalTitle" style="font-family:'Playfair Display';"></h2>
+                    <hr style="margin:20px 0; opacity:0.1;">
+                    <ul id="modalList" style="list-style:inside disc; line-height:1.8; font-size:0.9rem;"></ul>
+                    <button class="wa-order-btn">Inquire on WhatsApp</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="socialsModal" class="modal">
+        <div class="modal-content" style="max-width: 400px; padding: 40px; text-align: center;">
+            <h2 style="font-family:'Playfair Display'; margin-bottom:20px;">Follow Us</h2>
+            <a href="https://instagram.com" target="_blank" class="social-btn instagram">Instagram</a>
+            <a href="https://tiktok.com" target="_blank" class="social-btn tiktok">TikTok</a>
+            <button onclick="document.getElementById('socialsModal').style.display='none'; document.body.style.overflow='auto';" style="margin-top:20px; background:none; border:none; cursor:pointer; color:#888;">Close</button>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
